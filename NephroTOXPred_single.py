@@ -63,7 +63,7 @@ def run_progress():
         time.sleep(2)
     progress_bar.empty()
 
-st.write("Supported by the service of Zhu's AI-Drug Lab at the affiliated Brain Hospital, Guangzhou Medical University. If you have any questions, please contact me at 2018760376@gzhmu.edu.cn.")
+st.write("Supported by the service of Xiuqing Zhu at the AI-Drug Lab, the affiliated Brain Hospital, Guangzhou Medical University, China. If you have any questions, please feel free to contact me at 2018760376@gzhmu.edu.cn. ")
 
 # Define feature names
 feature_df = pd.read_csv('./features_for_ML.csv')
