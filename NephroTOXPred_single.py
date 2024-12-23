@@ -6,7 +6,6 @@ import shap
 import os
 from rdkit import Chem
 from rdkit.Chem import AllChem, MACCSkeys
-import matplotlib.pyplot as plt
 import time
 from PIL import Image
 
@@ -130,40 +129,6 @@ if st.button("Predict"):
         shap_df = pd.DataFrame(shap_values[0].T, columns=["SHAP value"], index=feature_names)
         shap_df["Absolute SHAP value"] = shap_df["SHAP value"].abs()
         st.write(shap_df)
-       
-        st.write("---") 
-        st.write("**The generated SHAP force plot of this compound:**")
-        
-        run_progress()
-        
-        # Delete old SHAP force plot image file (if it exists)
-        if os.path.exists("./shap_force_plot.png"):
-            os.remove("./shap_force_plot.png")
-
-        # Choose the index of the output you want to visualize
-        output_index = 0  # Adjust this index based on your specific needs
-
-        # Force plot for the specified output
-        expected_value = explainer.expected_value[output_index]
-
-        positive_color = "#FF8C69"
-        negative_color = "#B23AEE"
-            
-        # Generate the force plot for the specified output
-        shap.force_plot(
-            expected_value,
-            shap_values[output_index],
-            feature_names=pd.DataFrame([feature_vector], columns=feature_names).columns,
-            matplotlib=True,
-            show=True,
-            plot_cmap=[positive_color, negative_color]
-        )
-
-        # Save and display the image
-        plt.savefig("./shap_force_plot.png", bbox_inches='tight', dpi=1200)
-        st.image("./shap_force_plot.png")
-
-        run_progress()
         
         # Display features of this compound
         st.write("---")
