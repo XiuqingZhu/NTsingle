@@ -78,10 +78,13 @@ model = joblib.load('./Model_final.joblib')
 # Streamlit user interface
 st.title("Nephrotoxic Component Predictor")
 
-st.write("**Please enter a SMILE string for predicting nephrotoxic components.**")
+st.write("**Please enter the SMILE and InChIKey strings for predicting nephrotoxic components.**")
 
 # Smiles: string input
 smiles = st.text_input("SMILE:", value="")
+
+# InChIKey: string input
+InChIKey = st.text_input("InChIKey:", value="")
 
 if st.button("Predict"):
     # Generate feature vector
@@ -139,3 +142,27 @@ if st.button("Predict"):
         st.write("**The molecular fingerprints of this compound used in modeling:**")
         important_features = [feature_names[i] for i, value in enumerate(feature_vector) if value == 1]
         st.write(important_features)
+
+        run_progress()
+
+        @st.cache_data(ttl=3600) 
+        def load_env_compounds():
+             return pd.read_excel('./Environmental-Related Compounds Database.xlsx')
+
+        df_Env_compounds = load_env_compounds()
+
+        # Check if InChIKey exists in environmental compounds database (case-insensitive)
+        user_inchi = InChIKey.strip().upper()
+        env_inchis = df_Env_compounds['InChIKey'].str.strip().str.upper().tolist()
+        is_environmental = user_inchi in env_inchis
+
+        # Display environmental relevance information
+        if is_environmental:
+            st.success("**This compound is environmentally relevant!** 🔍")
+            st.caption("This compound is present in our environmental compounds database.")
+        else:
+            st.warning("**This compound is not in our environmental database.** ⚠️")
+            st.caption("Consider additional validation for environmental relevance.")
+
+        # Add spacing between sections
+        st.write("---")
