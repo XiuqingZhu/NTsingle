@@ -15,7 +15,7 @@ def load_image(image_path):
 
 @st.cache_data(ttl=3600) 
 def load_env_compounds():
-    return pd.read_excel('./Environmental-Related Compounds Database.xlsx')
+    return pd.read_csv('./Environmental-Related Compounds Database.csv')
 
 # Load and display the logo
 logo = load_image("./logo.png")
