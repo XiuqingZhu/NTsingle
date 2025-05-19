@@ -13,6 +13,10 @@ from PIL import Image
 def load_image(image_path):
     return Image.open(image_path)
 
+@st.cache_data(ttl=3600) 
+        def load_env_compounds():
+             return pd.read_excel('./Environmental-Related Compounds Database.xlsx')
+
 # Load and display the logo
 logo = load_image("./logo.png")
 st.image("./logo.png")
@@ -144,10 +148,6 @@ if st.button("Predict"):
         st.write(important_features)
 
         run_progress()
-
-        @st.cache_data(ttl=3600) 
-        def load_env_compounds():
-             return pd.read_excel('./Environmental-Related Compounds Database.xlsx')
 
         df_Env_compounds = load_env_compounds()
 
