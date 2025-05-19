@@ -62,7 +62,11 @@ def run_progress():
         time.sleep(2)
     progress_bar.empty()
 
-st.write("Supported by the service of Xiuqing Zhu at the AI-Drug Lab, the affiliated Brain Hospital, Guangzhou Medical University, China. If you have any questions, please feel free to contact me at 2018760376@gzhmu.edu.cn. ")
+st.write("TCM-EnvNephroToxPred: A computational tool for renal toxicity evaluation of environmentally relevant Traditional Chinese Medicine compounds developed through interdisciplinary collaboration. This predictive model assesses nephrotoxic risks in herbal-derived environmental contaminants.")
+
+st.write("Research Support: This work was enabled by computational infrastructure and expertise from Pro. Xiuqing Zhu, AI-Drug Lab, the Affiliated Brain Hospital of Guangzhou Medical University, China.")
+
+st.write("Contact: For scientific inquiries or collaborative opportunities, please contact: Pro. Xiuqing Zhu, Email: 2018760376@gzhmu.edu.cn")
 
 # Define feature names
 feature_df = pd.read_csv('./features_for_ML.csv')
